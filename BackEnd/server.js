@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 
 const mongoose = require('mongoose');
 
-const strConnection = 'mongodb+srv://admin:admin@cluster0.8taek.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const strConnection = "mongodb+srv://admin:admin@cluster0.eo9g2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 main().catch(err => console.log(err));
 
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     Poster:String
 });
 
-const movieModel = mongoose.model('martin', movieSchema);
+const movieModel = mongoose.model('Larrys', movieSchema);
 
 
 app.get('/', (req, res) => {
@@ -61,6 +61,14 @@ app.get('/api/movies/:id',(req, res)=>{
 
     movieModel.findById(req.params.id,(error,data)=>{
         res.json(data);
+    })
+})
+
+app.put('/api/movies/:id',(req,res)=>{
+    console.log("Update:"+req.params.id);
+
+    movieModel.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,data)=>{
+        res.send(data);
     })
 })
 
